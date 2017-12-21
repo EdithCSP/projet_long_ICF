@@ -1,4 +1,4 @@
-# Investigation bio-informatique du syndrome ICF par analyse de génome
+# Investigation bio-informatique du syndrome ICF par analyse de génome : amélioration de MEME pour l'analyse de séquence avec changement de méthylation du à des mutation associé à une pathologie. 
 
 doc : http://meme-suite.org/doc/install.html?man_type=web#prerequisite 
 ``` {}

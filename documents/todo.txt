@@ -1,0 +1,36 @@
+
+Modif input 
+ 	- faire un script qui modif les fichiers d'entrée ne doit pas depasser 100000 maximum dataset size in characters
+ Analyse Bioinfo
+ 		Analyse seq intergenique/genomique  
+ 	- lancer meme
+	- regupère les expressions regulières --> transformer en motif  /!\ p value > 10-6 , 80/8000
+	- recherche les motif dans tomtom  ---> donne les motifs connues 
+	- recherche GC dans les motifs connues est pas connues  
+	- merge tous les motifs inconnus
+	- regarde si y a un overlap ou pas avec les motifs connues --> utilisé les coordonnées 
+	- regarde si y a un overlap entre les motifs incoonues 
+		Analyse seq genomique 
+	- lancer dreme : analyse des facteurs de transcriptions 
+	- lancer centrimo ???
+
+
+ use dreme
+ dreme -oc results/test_tools/test_dreme -p '/home/cspe/M2_BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta' -m 5
+
+
+use meme
+meme /home/cspe/M2_BI/Projet_long/fwdfastafiles/test.fasta -oc results/test_tools/test_meme_5 -nmotifs 25 -w 5 
+meme /home/cspe/M2_BI/Projet_long/fwdfastafiles/test.fasta -oc results/test_tools/test_meme_6 -nmotifs 25 -w 6 
+meme /home/cspe/M2_BI/Projet_long/fwdfastafiles/test.fasta -oc results/test_tools/test_meme_7 -nmotifs 25 -w 7 
+meme /home/cspe/M2_BI/Projet_long/fwdfastafiles/test.fasta -oc results/test_tools/test_meme_8 -nmotifs 25 -w 8 
+
+use tomtom
+tomtom -xalph -oc results/test_tools/test_tomtom_5 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+tomtom -xalph -oc results/test_tools/test_tomtom_6 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_6/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+tomtom -xalph -oc results/test_tools/test_tomtom_7 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_7/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+tomtom -xalph -oc results/test_tools/test_tomtom_8 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_8/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+
+
+use centrimo
+centrimo --o results/test_tools/test_centrimo_5 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/data/test.fasta' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt'

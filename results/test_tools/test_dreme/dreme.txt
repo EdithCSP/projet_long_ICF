@@ -1,0 +1,119 @@
+# DREME 4.12.0
+#     command: dreme -oc results/test_tools/test_dreme -p /home/cspe/M2_BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta -m 5
+#   positives: 3957 from /home/cspe/M2_BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta (Sun Nov 05 16:05:12 CET 2017)
+#   negatives: 3957 from shuffled positives
+#        host: cspe-Inspiron-7559
+#        when: Wed Jan 03 19:04:05 CET 2018
+
+MEME version 4.12.0
+
+ALPHABET "DNA" DNA-LIKE
+A "Adenine" CC0000 ~ T "Thymine" 008000
+C "Cytosine" 0000CC ~ G "Guanine" FFB300
+N "Any base" = ACGT
+X = ACGT
+. = ACGT
+V "Not T" = ACG
+H "Not G" = ACT
+D "Not C" = AGT
+B "Not A" = CGT
+M "Amino" = AC
+R "Purine" = AG
+W "Weak" = AT
+S "Strong" = CG
+Y "Pyrimidine" = CT
+K "Keto" = GT
+U = T
+END ALPHABET
+
+strands: + -
+
+Background letter frequencies (from dataset):
+A 0.267 C 0.231 G 0.233 T 0.269
+
+
+MOTIF ACGTD DREME-1
+
+#             Word    RC Word        Pos        Neg    P-value    E-value
+# BEST       ACGTD      HACGT        818        347   8.7e-052   3.8e-047
+#            ACGTG      CACGT        495        175   1.2e-039   5.2e-035
+#            ACGTT      AACGT        425        188   5.0e-024   2.1e-019
+#            ACGTA      TACGT        253        122   1.9e-012   8.1e-008
+
+letter-probability matrix: alength= 4 w= 5 nsites= 866 E= 3.8e-047
+1.000000 0.000000 0.000000 0.000000
+0.000000 1.000000 0.000000 0.000000
+0.000000 0.000000 1.000000 0.000000
+0.000000 0.000000 0.000000 1.000000
+0.206697 0.000000 0.445727 0.347575
+
+
+MOTIF AWATAW DREME-2
+
+#             Word    RC Word        Pos        Neg    P-value    E-value
+# BEST      AWATAW     WTATWT        917        571   1.1e-023   4.7e-019
+#           AAATAT     ATATTT        365        182   2.0e-016   8.5e-012
+#           AAATAA     TTATTT        430        282   3.4e-009   1.4e-004
+#           ATATAA     TTATAT        230        132   7.7e-008   3.2e-003
+#           ATATAT     ATATAT         97         57   7.1e-004   3.0e+001
+
+letter-probability matrix: alength= 4 w= 6 nsites= 1106 E= 4.7e-019
+1.000000 0.000000 0.000000 0.000000
+0.742315 0.000000 0.000000 0.257685
+1.000000 0.000000 0.000000 0.000000
+0.000000 0.000000 0.000000 1.000000
+1.000000 0.000000 0.000000 0.000000
+0.596745 0.000000 0.000000 0.403255
+
+
+MOTIF CTGKR DREME-3
+
+#             Word    RC Word        Pos        Neg    P-value    E-value
+# BEST       CTGKR      YMCAG       2929       2574   2.4e-018   1.0e-013
+#            CTGTG      CACAG       1268       1019   3.8e-010   1.6e-005
+#            CTGTA      TACAG        734        572   5.3e-007   2.2e-002
+#            CTGGA      TCCAG       1156        988   1.2e-005   5.0e-001
+#            CTGGG      CCCAG       1200       1072   8.0e-004   3.3e+001
+
+letter-probability matrix: alength= 4 w= 5 nsites= 5259 E= 1.0e-013
+0.000000 1.000000 0.000000 0.000000
+0.000000 0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000 0.000000
+0.000000 0.000000 0.553527 0.446473
+0.415098 0.000000 0.584902 0.000000
+
+
+MOTIF ARAYG DREME-4
+
+#             Word    RC Word        Pos        Neg    P-value    E-value
+# BEST       ARAYG      CRTYT       2150       1802   2.9e-015   1.2e-010
+#            AAATG      CATTT       1231        978   1.3e-010   5.2e-006
+#            AAACG      CGTTT        289        191   2.3e-006   9.2e-002
+#            AGATG      CATCT        891        794   4.2e-003   1.7e+002
+#            AGACG      CGTCT        261        205   4.3e-003   1.7e+002
+
+letter-probability matrix: alength= 4 w= 5 nsites= 3093 E= 1.2e-010
+1.000000 0.000000 0.000000 0.000000
+0.584222 0.000000 0.415778 0.000000
+1.000000 0.000000 0.000000 0.000000
+0.000000 0.181054 0.000000 0.818946
+0.000000 0.000000 1.000000 0.000000
+
+
+MOTIF CGTGK DREME-5
+
+#             Word    RC Word        Pos        Neg    P-value    E-value
+# BEST       CGTGK      MCACG        631        407   4.6e-014   1.8e-009
+#            CGTGG      CCACG        376        232   6.7e-010   2.6e-005
+#            CGTGT      ACACG        272        186   2.0e-005   7.9e-001
+
+letter-probability matrix: alength= 4 w= 5 nsites= 688 E= 1.8e-009
+0.000000 1.000000 0.000000 0.000000
+0.000000 0.000000 1.000000 0.000000
+0.000000 0.000000 0.000000 1.000000
+0.000000 0.000000 1.000000 0.000000
+0.000000 0.000000 0.594477 0.405523
+
+
+# Stopping reason: target motif count reached
+#    Running time: 107.16 seconds

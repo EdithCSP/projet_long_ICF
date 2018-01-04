@@ -1,8 +1,8 @@
 #! /usr/bin/env python3
-# coding: utf-8
+# -*- coding: utf-8 -*-
 
+"""
 import os
-
 import argparse
 
 parser = argparse.ArgumentParser(description="calculate X to the power of Y")
@@ -23,3 +23,7 @@ else:
     print("{}^{} == {}".format(args.x, args.y, answer))
 
 print(args.x, args.y, args.z)
+
+"""
+if __name__ == '__main__': 
+	

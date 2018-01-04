@@ -5,7 +5,7 @@ Modif input
  		Analyse seq intergenique/genomique  
  	- lancer meme
 	- regupère les expressions regulières --> transformer en motif  /!\ p value > 10-6 , 80/8000
-	- recherche les motif dans tomtom  ---> donne les motifs connues 
+	- recherche les motif dans tomtom  ---> donne les motifs connues --> si n'est pas da ns output tomtom donc inconue
 	- recherche GC dans les motifs connues est pas connues  
 	- merge tous les motifs inconnus
 	- regarde si y a un overlap ou pas avec les motifs connues --> utilisé les coordonnées 
@@ -26,10 +26,10 @@ meme /home/cspe/M2_BI/Projet_long/fwdfastafiles/test.fasta -oc results/test_tool
 meme /home/cspe/M2_BI/Projet_long/fwdfastafiles/test.fasta -oc results/test_tools/test_meme_8 -nmotifs 25 -w 8 
 
 use tomtom
-tomtom -xalph -oc results/test_tools/test_tomtom_5 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
-tomtom -xalph -oc results/test_tools/test_tomtom_6 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_6/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
-tomtom -xalph -oc results/test_tools/test_tomtom_7 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_7/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
-tomtom -xalph -oc results/test_tools/test_tomtom_8 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_8/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+tomtom -xalph -o results/test_tools/test_tomtom_5 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+tomtom -xalph -o results/test_tools/test_tomtom_6 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_6/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+tomtom -xalph -o results/test_tools/test_tomtom_7 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_7/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
+tomtom -xalph -o results/test_tools/test_tomtom_8 '/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_8/meme.txt' '/home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme'
 
 
 use centrimo

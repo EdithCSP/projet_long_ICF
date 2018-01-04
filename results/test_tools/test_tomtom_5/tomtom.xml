@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <tomtom version="4.12.0" release="Tue Jun 27 16:22:50 2017 -0700">
   <model>
-    <command_line>tomtom -xalph -oc results/test_tools/test_tomtom_5 /home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt /home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme</command_line>
+    <command_line>tomtom -xalph -o results/test_tools/test_tomtom_5 /home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt /home/cspe/M2_BI/Projet_long/projet_long_ICF/bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme</command_line>
     <distance_measure value="ed"/>
     <threshold type="qvalue">0.5</threshold>
     <alphabet name="Protein" like="protein">
@@ -33,7 +33,7 @@
     <strands>none</strands>
     <background from="first_target" A="0.259257" C="0.237235" D="4.99995e-07" E="4.99995e-07" F="4.99995e-07" G="0.229227" H="4.99995e-07" I="4.99995e-07" K="4.99995e-07" L="4.99995e-07" M="4.99995e-07" N="4.99995e-07" P="4.99995e-07" Q="4.99995e-07" R="4.99995e-07" S="4.99995e-07" T="0.274272" V="4.99995e-07" W="4.99995e-07" Y="4.99995e-07"/>
     <host>cspe-Inspiron-7559</host>
-    <when>Thu Jan  4 00:38:22 2018</when>
+    <when>Thu Jan  4 01:38:17 2018</when>
   </model>
   <query_dbs>
     <db source="/home/cspe/M2_BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt" name="meme" loaded="25" excluded="19" last_mod_date="Thu Jan  4 00:07:17 2018"/>
@@ -989,5 +989,5 @@
       <target idx="51" off="12" pv="4.15e-02" ev="1.77e+01" qv="4.98e-01"/>
     </query>
   </matches>
-  <runtime cycles="496000" seconds="0.496"/>
+  <runtime cycles="516000" seconds="0.516"/>
 </tomtom>

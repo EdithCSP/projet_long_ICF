@@ -1,0 +1,7 @@
+	Motif CCCCCCCC MEME-1 regular expression
+--------------------------------------------------------------------------------
+CCCCCCCC
+--
+	Motif CTGCTGGG MEME-2 regular expression
+--------------------------------------------------------------------------------
+CTGCTGGG

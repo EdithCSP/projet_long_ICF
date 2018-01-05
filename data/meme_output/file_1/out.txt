@@ -1,0 +1,99 @@
+	Motif CACCCGGG MEME-1 regular expression
+--------------------------------------------------------------------------------
+CACCCGGG
+--
+	Motif AGGGAGGG MEME-2 regular expression
+--------------------------------------------------------------------------------
+AGGGAGGG
+--
+	Motif GCCCCCCC MEME-3 regular expression
+--------------------------------------------------------------------------------
+GCCCC[CG]CC
+--
+	Motif TGCAGCTG MEME-4 regular expression
+--------------------------------------------------------------------------------
+TGCAGCTG
+--
+	Motif CTCAGAGG MEME-5 regular expression
+--------------------------------------------------------------------------------
+CTCAGAGG
+--
+	Motif CAGCCTGG MEME-6 regular expression
+--------------------------------------------------------------------------------
+CAGCCTGG
+--
+	Motif AGGAGAGG MEME-7 regular expression
+--------------------------------------------------------------------------------
+AGGAGAGG
+--
+	Motif CAGAGAAA MEME-8 regular expression
+--------------------------------------------------------------------------------
+CAGAGAAA
+--
+	Motif CACTGAGA MEME-9 regular expression
+--------------------------------------------------------------------------------
+CACTGAGA
+--
+	Motif AGAGAAGC MEME-10 regular expression
+--------------------------------------------------------------------------------
+AGAGAAGC
+--
+	Motif CCGCCCCC MEME-11 regular expression
+--------------------------------------------------------------------------------
+CCG[CG]C[CG]CC
+--
+	Motif CCACCCCC MEME-12 regular expression
+--------------------------------------------------------------------------------
+CCACCCCC
+--
+	Motif TGCTGAGG MEME-13 regular expression
+--------------------------------------------------------------------------------
+TGCTGAG[AG]
+--
+	Motif AAGGACAG MEME-14 regular expression
+--------------------------------------------------------------------------------
+AAGGACAG
+--
+	Motif TGGAGAGA MEME-15 regular expression
+--------------------------------------------------------------------------------
+TGGAGAGA
+--
+	Motif AGCTGAGG MEME-16 regular expression
+--------------------------------------------------------------------------------
+AGCTGAG[AG]
+--
+	Motif AGCAGCTG MEME-17 regular expression
+--------------------------------------------------------------------------------
+AGCAGCTG
+--
+	Motif AAGACAGA MEME-18 regular expression
+--------------------------------------------------------------------------------
+AAGACAGA
+--
+	Motif AGGAAGAG MEME-19 regular expression
+--------------------------------------------------------------------------------
+AGGAAGAG
+--
+	Motif CACTGGGG MEME-20 regular expression
+--------------------------------------------------------------------------------
+CACTGGGG
+--
+	Motif CTGAGGAA MEME-21 regular expression
+--------------------------------------------------------------------------------
+CTGAGGAA
+--
+	Motif CTGGGAGA MEME-22 regular expression
+--------------------------------------------------------------------------------
+CTGGGAGA
+--
+	Motif CATGGCCT MEME-23 regular expression
+--------------------------------------------------------------------------------
+CATGGCCT
+--
+	Motif ACCCACGG MEME-24 regular expression
+--------------------------------------------------------------------------------
+ACCCAC[AG]G
+--
+	Motif CTGAGAAG MEME-25 regular expression
+--------------------------------------------------------------------------------
+CTGAGAA[AG]

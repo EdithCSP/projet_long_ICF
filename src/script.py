@@ -275,8 +275,90 @@ def launch_transf_regex_to_motif(path="../data/meme_output"):
 		#print(elt)
 		elt = elt.split("_")
 		num_file = elt[1]
-		print(num_file)
+		#print(num_file)
 		dico_meme_motif = transf_regex_to_motif('meme.txt', num_file)
+	os.system("rm ../data/motifs/concat_motif.txt")
+	os.system("cat ../data/motifs/* > ../data/motifs/concat_motif.txt")
+
+def find_known_motif(num_file="1"):
+	'''
+		Cette fonction permet d'analyse la sortie de tomtom pour trouver les motifs
+		connus pour un fichier
+		INPUT: 
+			- num_file : numero du fichier
+		OUTPUT : 
+			- liste des motifs connues dans un fichier  
+	'''
+	list_known_motif = []
+	fillin = open("../data/tomtom_output/file_"+num_file+"/tomtom.txt","r")
+	tmtm_out = fillin.readlines()
+	fillin.close()
+	for elt in tmtm_out[1:]:
+		#print(elt)
+		elt = elt.split("\t")
+		motif = elt[0]
+		if motif not in list_known_motif:
+			list_known_motif.append(motif)
+	os.system("mkdir ../data/tomtom_motif")
+	filout = open("../data/tomtom_motif/known_motifs_file_"+num_file+".txt","w")
+	for elt2 in list_known_motif:
+		filout.write(elt2+"\n")
+	filout.close()
+	
+
+def launch_find_known_motif(path="../data/tomtom_output"):
+	"""
+		Cette fonction permet de récuperer tous les motifs connues dans 
+		tous les fichiers sorties de TOMTOM
+		INPUT :
+			-  path : chemin vers la liste des fichiers de sorties de tomtom 
+		OUTPUT : 
+			- differents fichiers contenant tous les motifs connues 
+			- 1 fichier contenant tous les motifs connues concaténées 
+	"""
+	list_file = os.listdir(path)
+	for elt in list_file:
+		print(elt)
+		elt = elt.split("_")
+		num_file = elt[1]
+		#print(num_file)
+		dico_meme_motif = find_known_motif(num_file)
+	os.system("rm ../data/tomtom_motif/concat_known_motif.txt")
+	os.system("cat ../data/tomtom_motif/* > ../data/tomtom_motif/concat_known_motif.txt")
+
+def create_dico_knwon_unknown_motif():
+	'''
+		Cette fonction permet de créer un dictionnaire permettant de 
+		différenciés les motifs connus des motifs inconnus.
+		OUPUT:
+			- dictionnaire permettant de différenciés les motifs connus des motifs inconnus.
+	'''
+	filin1 = open("../data/motifs/concat_motif.txt","r") # tous les motifs
+	filin2 = open("../data/tomtom_motif/concat_known_motif.txt", "r") # motifs connus
+	all_motif = filin1.readlines()
+	known_motif = filin2.readlines()
+	filin1.close()
+	filin2.close()
+	# recherche motifs connus ou non
+	unknown_motif = []
+	for elt in all_motif:
+		if elt not in known_motif:
+			unknown_motif.append(elt)
+	dico_motif_knwon_unknown_motif = {}
+	dico_motif_knwon_unknown_motif["known_motif"] = all_motif
+	dico_motif_knwon_unknown_motif["unknown_motif"] = unknown_motif
+	#ecris dans un fichier la liste des motifs connus
+	filout1 = open("../results/known_motif.txt","w")
+	for elt in dico_motif_knwon_unknown_motif["known_motif"]:
+		filout1.write(elt)
+	filout1.close()
+	#ecris dans un fichier la liste des motifs inconnues
+	filout2 = open("../results/unknown_motif.txt","w")	
+	for elt in dico_motif_knwon_unknown_motif["unknown_motif"]:
+		filout2.write(elt)
+	filout2.close()	
+	return dico_motif_knwon_unknown_motif
+
 
 if __name__ == '__main__': 
 	os.system("export PATH=$HOME/meme/bin:$PATH")
@@ -290,4 +372,11 @@ if __name__ == '__main__':
 	##print(dico_meme_motif)
 	launch_transf_regex_to_motif()
 	#step_tomtom()
+	##find_known_motif("2")
+	launch_find_known_motif()
+	dico_knwon_unknown_motif = create_dico_knwon_unknown_motif()
+	##print(dico_knwon_unknown_motif)
 	
+
+
+

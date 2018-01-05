@@ -10,9 +10,9 @@ def create_dico_seq_concate_with_fasta(fasta_file):
 		Cette fonction permet de créer un dictionnaire à partir d'un fichier fasta 
 		avec en clé le nom de la sequences et en valeur la séquence concaténées.
 		INPUT: 
-		- fasta_file : fichier fasta
+			- fasta_file : fichier fasta
 		OUTPUT: 
-		- un dictionnaire avec en clé le nom de la sequences et en valeur la séquence concaténées.
+			- un dictionnaire avec en clé le nom de la sequences et en valeur la séquence concaténées.
 	'''
 	fa_file = open(fasta_file, "r")
 	liste_fa = fa_file.readlines()
@@ -38,10 +38,10 @@ def write_dico_fasta_format(dico, output_file):
 	'''
 		Cette fonction permet d'ecrire un dictionnaire au format fasta.
 		INPUT : 
-		- dico : dictionnaire
-		- output_file : nom fichier sortie 
+			- dico : dictionnaire
+			- output_file : nom fichier sortie 
 		OUTPUT : 	
-		- fichier format fasta
+			- fichier format fasta
 	'''
 	filout = open(output_file, "w")
 	for key, val in dico.items():
@@ -55,10 +55,10 @@ def write_dico_to_file(dico, output_file):
 	'''
 		Cette fonction permet d'ecrire un dictionnaire au format fasta.
 		INPUT : 
-		- dico : dictionnaire
-		- output_file : nom fichier sortie 
+			- dico : dictionnaire
+			- output_file : nom fichier sortie 
 		OUTPUT : 	
-		- fichier fichier
+			- fichier fichier
 	'''
 	filout = open(output_file, "w")
 	for key, val in dico.items():
@@ -97,6 +97,7 @@ def parse_fasta_for_meme(dico):
 				write_dico_fasta_format(dico_new,"../data/meme_input/file_"+str(i)+".fasta")	
 				print("file_"+str(i)+".fasta")
 
+
 def launch_meme(input_meme, output_meme, max_motif, len_motif):
 	'''
 		Cette fonction permet de lancer MEME. 
@@ -112,10 +113,22 @@ def launch_meme(input_meme, output_meme, max_motif, len_motif):
 	print(cmd)
 	os.system(cmd)
 
+
 def step_meme(max_motif, len_motif,path_in="../data/meme_input", path_out="../data/meme_output"):
+	'''
+		Cette fonction permet de lancer MEME sur tout les fichiers fasta et placer les resultats 
+		dans data dans des dossiers séparer
+		INPUT: 
+			- max_motif : nombre de motif à rechercher
+			- len_motif : taille du motif 
+			- path_in : chemin vers les fichiers d'entrée de MEME
+			- path_out : chemin vers les fichiers de sortie de MEME	
+		OUTPUT:
+			- meme.txt 	
+	'''
 	#path_in = "../data/meme_input"
 	#path_out = "../data/meme_output"
-	list_meme_input = os.listdir(path_in)
+	list_meme_input = os.listdir(path_in) # liste des fichiers fasta
 	cmd = "mkdir {}".format(path_out)
 	os.system(cmd)
 	for file_sel in list_meme_input:
@@ -125,18 +138,51 @@ def step_meme(max_motif, len_motif,path_in="../data/meme_input", path_out="../da
 		launch_meme(path_in+"/"+file_sel, path_out+"/"+name_out, max_motif, len_motif)
 
 
+def launch_tomtom(input_tomtom, output_tomtom, db):
+	'''
+		Cette fonction permet de lancer TOMTOM. 
+		INPUT:
+			- input_tomtom :sortie de meme
+			- output_tomtom : nom du fchier de sortie
+			- db : base de données dans laquelle les motifs sont recherchés
+		OUTPUT: 
+			- fichier tomtom.txt qui contient les motifs retrouvé dans la base de données
+	'''
+	cmd = "tomtom -xalph -oc {} {} {}".format(output_tomtom, input_tomtom, db)
+	print(cmd)
+	os.system(cmd)
+
+
+def step_tomtom(max_motif, len_motif,path_in="../data/meme_output", path_out="../data/tomtom_output"):
+	'''
+		Cette fonction permet de lancer TOMTOM sur tout les fichiers fasta et placer les resultats 
+		dans data dans des dossiers séparer
+		INPUT: 
+			- db : base de données dans laquelle les motifs sont recherchés		
+			- path_in : chemin vers les fichiers d'entrée de TOMTOM (sortie de MEME)
+			- path_out : chemin vers les fichiers de sortie de TOMTOM	
+		OUTPUT:
+			- tomtom.txt 	
+	'''
+	list_meme_input = os.listdir(path_in)
+	cmd = "mkdir {}".format(path_out)
+	os.system(cmd)
+	for file_sel in list_meme_input:
+		launch_tomtom(path_in+"/"+file_sel, path_out+"/"+file_sel, db)
+
+
 def recup_exp_reg_motif(meme_output, list_motif_exp_reg, path="../data/meme_output"):
 	'''
 		Cette fonction permet de parser les sorties de MEME puis de stockes
 		dans un dictionnaire l'identifiant du motif et l'expression regulère 
 		associé au motif.
 		INPUT: 
-		- meme_output : sortie de MEME
-		- list_motif_exp_reg : mon du fichier
+			- meme_output : sortie de MEME
+			- list_motif_exp_reg : mon du fichier
 		OUTPUT:
-		- dictionnaire avec comme clé l'identifiant du motif et comme valeur 
-		l'expression regulère du motif
-		- ficher contenant le contenu du dico 
+			- dictionnaire avec comme clé l'identifiant du motif et comme valeur 
+			l'expression regulère du motif
+			- ficher contenant le contenu du dico 
 	'''
 	#grep -A2 " regular expression" '/home/sdv/m2bi/echan/M2BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt' > out.txt
 	#parse fichier output MEME
@@ -166,12 +212,44 @@ def recup_exp_reg_motif(meme_output, list_motif_exp_reg, path="../data/meme_outp
 	return dico_meme_motif_reg_exp
 
 
+
 if __name__ == '__main__': 
+	os.system("export PATH=$HOME/meme/bin:$PATH ")
 	dico_all_seq = create_dico_seq_concate_with_fasta("/home/sdv/m2bi/echan/M2BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta")
 	parse_fasta_for_meme(dico_all_seq)
 	#step_meme()
 	recup_exp_reg_motif()
+	t=recup_exp_reg_motif('../results/test_tools/test_meme_5/meme.txt', "../data/meme_output/all_motif")
 
-# generate_all_motif
-t=recup_exp_reg_motif('/home/sdv/m2bi/echan/M2BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt', "all_motif")
 
+	# generate_all_motif
+
+dico_motif_regex = recup_exp_reg_motif()
+for key, val in dico_motif_regex.items():
+	print key, val
+
+val="CT[GA]GAA[AG]"
+val="CTGAGAAAG"
+
+if("[" not in val) and ("]" not in val):
+	print(val)
+else:
+	print(val)
+	exp = re.findall("\[[A-Z]*\]",val)
+	exp = exp.replace("[","")
+	exp = exp.replace("]","")
+	exp = exp.replace("'","")
+	list_exp = list(exp)
+	print(list_exp)		
+	for i in range(len(val)):
+		if (val[i] not in "[") and (val[i] not in "[")
+			print 
+
+
+exp = re.findall("\[[A-Z]*\]",val)
+exp = str(exp)
+exp = exp.replace("[","")
+exp = exp.replace("]","")
+exp = exp.replace("'","")
+list_exp = list(exp)
+len_motif = len(list_exp)

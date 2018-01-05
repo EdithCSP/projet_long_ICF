@@ -171,14 +171,15 @@ def step_tomtom(max_motif, len_motif,path_in="../data/meme_output", path_out="..
 		launch_tomtom(path_in+"/"+file_sel, path_out+"/"+file_sel, db)
 
 
-def recup_exp_reg_motif(meme_output, list_motif_exp_reg, path="../data/meme_output"):
+def recup_exp_reg_motif(meme_output, list_motif_exp_reg, num_file="1", path="../data/meme_output"):
 	'''
 		Cette fonction permet de parser les sorties de MEME puis de stockes
 		dans un dictionnaire l'identifiant du motif et l'expression regulère 
 		associé au motif.
 		INPUT: 
 			- meme_output : sortie de MEME
-			- list_motif_exp_reg : mon du fichier
+			- list_motif_exp_reg : mon du fichier de sortie
+			- num_file numero du fichier
 		OUTPUT:
 			- dictionnaire avec comme clé l'identifiant du motif et comme valeur 
 			l'expression regulère du motif
@@ -186,8 +187,10 @@ def recup_exp_reg_motif(meme_output, list_motif_exp_reg, path="../data/meme_outp
 	'''
 	#grep -A2 " regular expression" '/home/sdv/m2bi/echan/M2BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/meme.txt' > out.txt
 	#parse fichier output MEME
-	tmp="/home/sdv/m2bi/echan/M2BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_5/out.txt"
-	cmd = "grep -A2 'regular expression' {} > {}".format(meme_output, tmp)
+	#tmp="/home/sdv/m2bi/echan/M2BI/Projet_long/projet_long_ICF/results/test_tools/test_meme_8/out.txt"
+	tmp = path+"/file_"+num_file+"/out.txt"
+	meme_output_f = path+"/file_"+num_file+"/"+meme_output
+	cmd = "grep -A2 'regular expression' {} > {}".format(meme_output_f, tmp)
 	os.system(cmd)	
 	# transforme fichier parser en dico
 	tmp_file = open(tmp,"r")
@@ -199,7 +202,7 @@ def recup_exp_reg_motif(meme_output, list_motif_exp_reg, path="../data/meme_outp
 			elt=elt.replace("\n","")
 			new_li.append(elt)
 			#print(elt)
-	print(new_li)
+	#print(new_li)
 	dico_meme_motif_reg_exp = {}
 	for i in range(0, len(new_li)-1, 2):
 		key = new_li[i]
@@ -208,48 +211,83 @@ def recup_exp_reg_motif(meme_output, list_motif_exp_reg, path="../data/meme_outp
 		#print motif_num, exp_reg_motif
 		dico_meme_motif_reg_exp[motif_num]=exp_reg_motif
 	write_dico_to_file(dico_meme_motif_reg_exp, list_motif_exp_reg)
-	print(dico_meme_motif_reg_exp)
+	#print(dico_meme_motif_reg_exp)
 	return dico_meme_motif_reg_exp
 
 
+def transf_regex_to_motif(meme_output, num_file="1", path="../data/meme_output"):
+	'''
+		Cette fonction permet de generer la liste de tous les motifs a partir des expressions régulières
+		retrouvé par meme.
+			INPUT: 
+			- meme_output : sortie de MEME
+			- num_file numero du fichier
+				OUTPUT:
+			- dictionnaire avec comme clé l'identifiant du motif et comme valeur 
+			l'expression regulère du motif
+			- ficher contenant le contenu du dico 
+	'''
+	dico_meme_motif = {}
+	#dico_motif_regex = recup_exp_reg_motif('meme.txt', "all_motif")
+	dico_motif_regex = recup_exp_reg_motif(meme_output, "motif_regex.txt", num_file)
+	#print(dico_motif_regex)
+	for key, val in dico_motif_regex.items():
+		#print(key, val)
+		cmd = "python ../bin/exrex.py {} > motif.txt".format(val)
+		#print(cmd)
+		os.system(cmd)
+		filin = open("motif.txt","r")
+		motif = filin.readlines()
+		filin.close()
+		for mot in motif:
+			#print(key, val, mot)
+			mot = mot.replace("\n","")
+			if key not in dico_meme_motif:
+				dico_meme_motif[key] = []
+				dico_meme_motif[key].append(mot)
+			else :
+				dico_meme_motif[key].append(mot)
+		list_motif = list(dico_meme_motif.values())
+	os.system("mkdir ../data/motifs") 	
+	filout = open("../data/motifs/list_motif_file_"+num_file+".txt","w")
+	for elt in list_motif:
+		if(len(elt)>1):
+				for elt2 in elt:
+					filout.write(elt2+"\n")
+		else:
+			filout.write(elt[0]+"\n")
+	filout.close()
+	return dico_meme_motif	
+
+
+def launch_transf_regex_to_motif(path="../data/meme_output"):
+	"""
+	Cette fonction permet de récuperer tous les motifs associés au 
+	différents fichiers fasta
+	INPUT :
+		-  path : chemin vers la liste des fichiers de sorties de meme 
+	OUTPUT : 
+		- differents fichiers contenant tous les motifs
+		- 1 fichier contenant tous les motifs concaténées 
+	"""
+	list_file = os.listdir(path)
+	for elt in list_file:
+		#print(elt)
+		elt = elt.split("_")
+		num_file = elt[1]
+		print(num_file)
+		dico_meme_motif = transf_regex_to_motif('meme.txt', num_file)
 
 if __name__ == '__main__': 
-	os.system("export PATH=$HOME/meme/bin:$PATH ")
+	os.system("export PATH=$HOME/meme/bin:$PATH")
 	dico_all_seq = create_dico_seq_concate_with_fasta("/home/sdv/m2bi/echan/M2BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta")
 	parse_fasta_for_meme(dico_all_seq)
-	#step_meme()
-	recup_exp_reg_motif()
-	t=recup_exp_reg_motif('../results/test_tools/test_meme_5/meme.txt', "../data/meme_output/all_motif")
-
-
-	# generate_all_motif
-
-dico_motif_regex = recup_exp_reg_motif()
-for key, val in dico_motif_regex.items():
-	print key, val
-
-val="CT[GA]GAA[AG]"
-val="CTGAGAAAG"
-
-if("[" not in val) and ("]" not in val):
-	print(val)
-else:
-	print(val)
-	exp = re.findall("\[[A-Z]*\]",val)
-	exp = exp.replace("[","")
-	exp = exp.replace("]","")
-	exp = exp.replace("'","")
-	list_exp = list(exp)
-	print(list_exp)		
-	for i in range(len(val)):
-		if (val[i] not in "[") and (val[i] not in "[")
-			print 
-
-
-exp = re.findall("\[[A-Z]*\]",val)
-exp = str(exp)
-exp = exp.replace("[","")
-exp = exp.replace("]","")
-exp = exp.replace("'","")
-list_exp = list(exp)
-len_motif = len(list_exp)
+	#step_meme(25, 5)
+	##dico_motif_regex = recup_exp_reg_motif('meme.txt', "all_motif")
+	##print(dico_motif_regex)
+	##t=recup_exp_reg_motif('../results/test_tools/test_meme_5/meme.txt', "all_motif")
+	##dico_meme_motif = transf_regex_to_motif('meme.txt')
+	##print(dico_meme_motif)
+	launch_transf_regex_to_motif()
+	#step_tomtom()
+	

@@ -114,7 +114,24 @@ def launch_meme(input_meme, output_meme, max_motif, len_motif):
 	os.system(cmd)
 
 
-def step_meme(max_motif, len_motif,path_in="../data/meme_input", path_out="../data/meme_output"):
+def launch_meme_width_min_max(input_meme, output_meme, max_motif, min_len, max_len):
+	'''
+		Cette fonction permet de lancer MEME. 
+		INPUT:
+			- input_meme : nom du fichier fasta
+			- output_meme : nom du fchier de sortie
+			- max_motif : nombre de motif à rechercher
+			- min_len : taille du motif minimal
+			- max_len : taille du motif maximal
+		OUTPUT: 
+			- fichier meme.txt qui contient les motifs
+	'''
+	cmd = "meme {} -oc {} -nmotifs {} -minw {} -maxw {}".format(input_meme, output_meme, max_motif, min_len, max_len)
+	print(cmd)
+	os.system(cmd)
+
+
+def step_meme(max_motif, len_motif, path_in="../data/meme_input", path_out="../data/meme_output"):
 	'''
 		Cette fonction permet de lancer MEME sur tout les fichiers fasta et placer les resultats 
 		dans data dans des dossiers séparer
@@ -138,6 +155,32 @@ def step_meme(max_motif, len_motif,path_in="../data/meme_input", path_out="../da
 		launch_meme(path_in+"/"+file_sel, path_out+"/"+name_out, max_motif, len_motif)
 
 
+def step_meme_width_min_max(max_motif, min_len, max_len, path_in="../data/meme_input", path_out="../data/meme_output"):
+	'''
+		Cette fonction permet de lancer MEME sur tout les fichiers fasta et placer les resultats 
+		dans data dans des dossiers séparer
+		INPUT: 
+			- max_motif : nombre de motif à rechercher
+			- min_len : taille du motif minimal
+			- max_len : taille du motif maximal
+			- path_in : chemin vers les fichiers d'entrée de MEME
+			- path_out : chemin vers les fichiers de sortie de MEME	
+		OUTPUT:
+			- meme.txt 	
+	'''
+	#path_in = "../data/meme_input"
+	#path_out = "../data/meme_output"
+	list_meme_input = os.listdir(path_in) # liste des fichiers fasta
+	cmd = "mkdir {}".format(path_out)
+	os.system(cmd)
+	for file_sel in list_meme_input:
+		tmp = file_sel
+		tmp = tmp.split(".")
+		name_out = tmp[0]
+		launch_meme_width_min_max(path_in+"/"+file_sel, path_out+"/"+name_out, max_motif, min_len, max_len)			
+
+
+
 def launch_tomtom(input_tomtom, output_tomtom, db):
 	'''
 		Cette fonction permet de lancer TOMTOM. 
@@ -153,7 +196,7 @@ def launch_tomtom(input_tomtom, output_tomtom, db):
 	os.system(cmd)
 
 
-def step_tomtom(max_motif, len_motif,path_in="../data/meme_output", path_out="../data/tomtom_output"):
+def step_tomtom(db,path_in="../data/meme_output", path_out="../data/tomtom_output"):
 	'''
 		Cette fonction permet de lancer TOMTOM sur tout les fichiers fasta et placer les resultats 
 		dans data dans des dossiers séparer
@@ -395,10 +438,13 @@ def find_GC_in_motif():
 	filout2.close()
 
 if __name__ == '__main__': 
-	os.system("export PATH=$HOME/meme/bin:$PATH")
-	dico_all_seq = create_dico_seq_concate_with_fasta("/home/sdv/m2bi/echan/M2BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta")
+	cmd = "export PATH=$HOME/meme/bin:$PATH"
+	os.system(cmd)
+	dico_all_seq = create_dico_seq_concate_with_fasta("/home/cspe/M2_BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta")
 	parse_fasta_for_meme(dico_all_seq)
 	#step_meme(25, 5)
+	step_meme_width_min_max(100, 5, 8)
+	step_tomtom("../bin/DB/motif_databases/HUMAN/HOCOMOCOv11_full_HUMAN_mono_meme_format.meme")
 	##dico_motif_regex = recup_exp_reg_motif('meme.txt', "all_motif")
 	##print(dico_motif_regex)
 	##t=recup_exp_reg_motif('../results/test_tools/test_meme_5/meme.txt', "all_motif")
@@ -412,4 +458,4 @@ if __name__ == '__main__':
 	##print(dico_knwon_unknown_motif)
 	find_GC_in_motif()
 	# subprosses.call
-# recherche GC
+

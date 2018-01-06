@@ -29,7 +29,7 @@ if __name__ == '__main__':
 	cmd = "export PATH=$HOME/meme/bin:$PATH"
 	os.system(cmd)
 	dico_all_seq = tools.create_dico_seq_concate_with_fasta(fasta_fi)
-	#dico_all_seq = tools.create_dico_seq_concate_with_fasta("/home/cspe/M2_BI/Projet_long/fwdfastafiles/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta")
+	#dico_all_seq = tools.create_dico_seq_concate_with_fasta("../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta")
 	meme_suite.parse_fasta_for_meme(dico_all_seq)
 	#meme_suite.step_meme(25, 5)
 	#meme_suite.step_meme_width_min_max(100, 5, 8, 10)
@@ -44,9 +44,9 @@ if __name__ == '__main__':
 	#step_tomtom()
 	##find_known_motif("2")
 	meme_suite.launch_find_known_motif()
-	meme_suite.dico_knwon_unknown_motif = meme_suite.create_dico_knwon_unknown_motif()
+	dico_knwon_unknown_motif = meme_suite.create_dico_knwon_unknown_motif()
 	##print(dico_knwon_unknown_motif)
-	complement_meme.find_GC_in_motif()
+	complement_meme.find_CG_in_motif()
 	# subprosses.call
 	end = time.time()
 	print("Duree du programme : {:.2f} secondes".format(end - begin))

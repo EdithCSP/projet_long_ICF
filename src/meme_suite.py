@@ -329,22 +329,30 @@ def create_dico_knwon_unknown_motif():
 	filin1.close()
 	filin2.close()
 	# recherche motifs connus ou non
+	known_motif_c = []
+	for elt in known_motif:
+		elt = elt.replace("\n","")
+		elt = elt.replace(" ","")		
+		known_motif_c.append(elt)
 	unknown_motif = []
 	for elt in all_motif:
-		if elt not in known_motif:
+		elt = elt.replace("\n","")
+		elt = elt.replace(" ","")
+		if elt not in known_motif_c:
 			unknown_motif.append(elt)
+	# dico 
 	dico_motif_knwon_unknown_motif = {}
-	dico_motif_knwon_unknown_motif["known_motif"] = all_motif
+	dico_motif_knwon_unknown_motif["known_motif"] = known_motif_c
 	dico_motif_knwon_unknown_motif["unknown_motif"] = unknown_motif
 	#ecris dans un fichier la liste des motifs connus
 	filout1 = open("../results/known_motif.txt","w")
 	for elt in dico_motif_knwon_unknown_motif["known_motif"]:
-		filout1.write(elt)
+		filout1.write(elt+"\n")
 	filout1.close()
 	#ecris dans un fichier la liste des motifs inconnues
 	filout2 = open("../results/unknown_motif.txt","w")	
 	for elt in dico_motif_knwon_unknown_motif["unknown_motif"]:
-		filout2.write(elt)
+		filout2.write(elt+"\n")
 	filout2.close()	
 	return dico_motif_knwon_unknown_motif
 

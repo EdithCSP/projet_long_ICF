@@ -98,7 +98,7 @@ def parse_fasta_for_meme(dico):
 				print("file_"+str(i)+".fasta")
 
 
-def launch_meme(input_meme, output_meme, max_motif, len_motif, nb_procces="2"):
+def launch_meme(input_meme, output_meme, max_motif, len_motif, nb_procces = 2, min_rep = 10):
 	'''
 		Cette fonction permet de lancer MEME. 
 		INPUT:
@@ -107,15 +107,16 @@ def launch_meme(input_meme, output_meme, max_motif, len_motif, nb_procces="2"):
 			- max_motif : nombre de motif à rechercher
 			- len_motif : taille du motif 
 			- nb_procces : nombre de processus a utiliser
+			- min_rep : nombre de répétition par sites 
 		OUTPUT: 
 			- fichier meme.txt qui contient les motifs
 	'''
-	cmd = "meme {} -oc {} -nmotifs {} -w {} -p {}".format(input_meme, output_meme, max_motif, len_motif, nb_procces)
+	cmd = "meme {} -oc {} -nmotifs {} -w {} -p {} -minsites {}".format(input_meme, output_meme, max_motif, len_motif, nb_procces, min_rep)
 	print(cmd)
 	os.system(cmd)
 
 
-def launch_meme_width_min_max(input_meme, output_meme, max_motif, min_len, max_len, nb_procces="2"):
+def launch_meme_width_min_max(input_meme, output_meme, max_motif, min_len, max_len, nb_procces = 2, min_rep = 10):
 	'''
 		Cette fonction permet de lancer MEME. 
 		INPUT:
@@ -125,15 +126,16 @@ def launch_meme_width_min_max(input_meme, output_meme, max_motif, min_len, max_l
 			- min_len : taille du motif minimal
 			- max_len : taille du motif maximal
 			- nb_procces : nombre de processus a utiliser
+			- min_rep : nombre de répétition par sites
 		OUTPUT: 
 			- fichier meme.txt qui contient les motifs
 	'''
-	cmd = "meme {} -oc {} -nmotifs {} -minw {} -maxw {} -p {}".format(input_meme, output_meme, max_motif, min_len, max_len, nb_procces)
+	cmd = "meme {} -oc {} -nmotifs {} -minw {} -maxw {} -p {} -minsites {}".format(input_meme, output_meme, max_motif, min_len, max_len, nb_procces, min_rep)
 	print(cmd)
 	os.system(cmd)
 
 
-def step_meme(max_motif, len_motif, nb_procces="2", path_in="../data/meme_input", path_out="../data/meme_output"):
+def step_meme(max_motif, len_motif, nb_procces = 2, min_rep = 10 ,path_in="../data/meme_input", path_out="../data/meme_output"):
 	'''
 		Cette fonction permet de lancer MEME sur tout les fichiers fasta et placer les resultats 
 		dans data dans des dossiers séparer
@@ -143,6 +145,7 @@ def step_meme(max_motif, len_motif, nb_procces="2", path_in="../data/meme_input"
 			- path_in : chemin vers les fichiers d'entrée de MEME
 			- path_out : chemin vers les fichiers de sortie de MEME	
 			- nb_procces : nombre de processus a utiliser
+			- min_rep : nombre de répétition par sites
 		OUTPUT:
 			- meme.txt 	
 	'''
@@ -155,10 +158,10 @@ def step_meme(max_motif, len_motif, nb_procces="2", path_in="../data/meme_input"
 		tmp = file_sel
 		tmp = tmp.split(".")
 		name_out = tmp[0]
-		launch_meme(path_in+"/"+file_sel, path_out+"/"+name_out, max_motif, len_motif, nb_procces)
+		launch_meme(path_in+"/"+file_sel, path_out+"/"+name_out, max_motif, len_motif, nb_procces, min_rep)
 
 
-def step_meme_width_min_max(max_motif, min_len, max_len, nb_procces="2", path_in="../data/meme_input", path_out="../data/meme_output"):
+def step_meme_width_min_max(max_motif, min_len, max_len, nb_procces = 2, min_rep = 10, path_in="../data/meme_input", path_out="../data/meme_output"):
 	'''
 		Cette fonction permet de lancer MEME sur tout les fichiers fasta et placer les resultats 
 		dans data dans des dossiers séparer
@@ -169,6 +172,7 @@ def step_meme_width_min_max(max_motif, min_len, max_len, nb_procces="2", path_in
 			- path_in : chemin vers les fichiers d'entrée de MEME
 			- path_out : chemin vers les fichiers de sortie de MEME
 			- nb_procces : nombre de processus a utiliser
+			- min_rep : nombre de répétition par sites
 		OUTPUT:
 			- meme.txt 	
 	'''
@@ -181,7 +185,7 @@ def step_meme_width_min_max(max_motif, min_len, max_len, nb_procces="2", path_in
 		tmp = file_sel
 		tmp = tmp.split(".")
 		name_out = tmp[0]
-		launch_meme_width_min_max(path_in+"/"+file_sel, path_out+"/"+name_out, max_motif, min_len, max_len, nb_procces)			
+		launch_meme_width_min_max(path_in+"/"+file_sel, path_out+"/"+name_out, max_motif, min_len, max_len, nb_procces, min_rep)			
 
 
 

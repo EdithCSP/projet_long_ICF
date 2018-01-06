@@ -4,6 +4,8 @@
 # MODULES
 import re
 import os
+import meme_suite
+import complement_meme
 
 def create_dico_seq_concate_with_fasta(fasta_file):
 	'''
@@ -66,5 +68,4 @@ def write_dico_to_file(dico, output_file):
 	filout.close()
 
 
-if __name__ == '__main__': 
-	
+#if __name__ == '__main__':

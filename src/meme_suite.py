@@ -4,6 +4,8 @@
 # MODULES
 import re
 import os
+import tools
+import complement_meme
 
 def parse_fasta_for_meme(dico):
 	'''
@@ -33,7 +35,7 @@ def parse_fasta_for_meme(dico):
 			#print(val)
 			compt = compt + len(val)			
 			if(compt == 100001):
-				write_dico_fasta_format(dico_new,"../data/meme_input/file_"+str(i)+".fasta")	
+				tools.write_dico_fasta_format(dico_new,"../data/meme_input/file_"+str(i)+".fasta")	
 				print("file_"+str(i)+".fasta")
 
 
@@ -197,7 +199,7 @@ def recup_exp_reg_motif(meme_output, list_motif_exp_reg, num_file="1", path="../
 		motif_num = key.split(" ")[2]
 		#print motif_num, exp_reg_motif
 		dico_meme_motif_reg_exp[motif_num]=exp_reg_motif
-	write_dico_to_file(dico_meme_motif_reg_exp, list_motif_exp_reg)
+	tools.write_dico_to_file(dico_meme_motif_reg_exp, list_motif_exp_reg)
 	#print(dico_meme_motif_reg_exp)
 	return dico_meme_motif_reg_exp
 
@@ -347,4 +349,4 @@ def create_dico_knwon_unknown_motif():
 	return dico_motif_knwon_unknown_motif
 
 
-if __name__ == '__main__': 
+#if __name__ == '__main__':

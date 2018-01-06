@@ -4,6 +4,8 @@
 # MODULES
 import re
 import os
+import tools
+import meme_suite
 
 def find_GC_in_motif():
 	'''
@@ -39,4 +41,5 @@ def find_GC_in_motif():
 	filout1.close()
 	filout2.close()
 
-if __name__ == '__main__': 
+
+#if __name__ == '__main__': 

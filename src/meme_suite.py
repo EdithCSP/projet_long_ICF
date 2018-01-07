@@ -181,6 +181,7 @@ def recup_exp_reg_motif(meme_output, list_motif_exp_reg, num_file="1", path="../
 	meme_output_f = path+"/file_"+num_file+"/"+meme_output
 	cmd = "grep -A2 'regular expression' {} > {}".format(meme_output_f, tmp)
 	os.system(cmd)	
+	#print(cmd)
 	# transforme fichier parser en dico
 	tmp_file = open(tmp,"r")
 	tmp_liste = tmp_file.readlines()
@@ -200,7 +201,7 @@ def recup_exp_reg_motif(meme_output, list_motif_exp_reg, num_file="1", path="../
 		#print motif_num, exp_reg_motif
 		dico_meme_motif_reg_exp[motif_num]=exp_reg_motif
 	tools.write_dico_to_file(dico_meme_motif_reg_exp, list_motif_exp_reg)
-	#print(dico_meme_motif_reg_exp)
+	print(dico_meme_motif_reg_exp)
 	return dico_meme_motif_reg_exp
 
 
@@ -219,7 +220,7 @@ def transf_regex_to_motif(meme_output, num_file="1", path="../data/meme_output")
 	dico_meme_motif = {}
 	#dico_motif_regex = recup_exp_reg_motif('meme.txt', "all_motif")
 	dico_motif_regex = recup_exp_reg_motif(meme_output, "motif_regex.txt", num_file)
-	#print(dico_motif_regex)
+	print(dico_motif_regex)
 	for key, val in dico_motif_regex.items():
 		#print(key, val)
 		cmd = "python ../bin/exrex.py {} > motif.txt".format(val)
@@ -236,6 +237,7 @@ def transf_regex_to_motif(meme_output, num_file="1", path="../data/meme_output")
 				dico_meme_motif[key].append(mot)
 			else :
 				dico_meme_motif[key].append(mot)
+		#print(dico_meme_motif)		
 		list_motif = list(dico_meme_motif.values())
 	os.system("mkdir ../data/motifs") 	
 	filout = open("../data/motifs/list_motif_file_"+num_file+".txt","w")
@@ -268,6 +270,7 @@ def launch_transf_regex_to_motif(path="../data/meme_output"):
 		dico_meme_motif = transf_regex_to_motif('meme.txt', num_file)
 	os.system("rm ../data/motifs/concat_motif.txt")
 	os.system("cat ../data/motifs/* > ../data/motifs/concat_motif.txt")
+
 
 def find_known_motif(num_file="1"):
 	'''
@@ -314,6 +317,7 @@ def launch_find_known_motif(path="../data/tomtom_output"):
 		dico_meme_motif = find_known_motif(num_file)
 	os.system("rm ../data/tomtom_motif/concat_known_motif.txt")
 	os.system("cat ../data/tomtom_motif/* > ../data/tomtom_motif/concat_known_motif.txt")
+
 
 def create_dico_knwon_unknown_motif():
 	'''

@@ -36,17 +36,18 @@ if __name__ == '__main__':
 	max_len_motif = args.max_len
 	rep = args.nb_rep	
 	# main
-	cmd = "export PATH=$HOME/meme/bin:$PATH"
-	os.system(cmd)
+	os.system("export PATH=$HOME/meme/bin:$PATH")
+	os.system("chmod +x load_meme.sh")
+	os.system("./load_meme.sh")	
 	dico_all_seq = tools.create_dico_seq_concate_with_fasta(fasta_fi)
 	meme_suite.parse_fasta_for_meme(dico_all_seq)
-	if args.len:
-		#meme_suite.step_meme(25, 5)
-		meme_suite.step_meme(nb_motif_max, len_motif)
-	else : 
-		#meme_suite.step_meme_width_min_max(100, 5, 8, 10)
-		meme_suite.step_meme_width_min_max(nb_motif_max, min_len_motif, max_len_motif, rep)
-	meme_suite.step_tomtom(db)
+	#if args.len:
+	#meme_suite.step_meme(25, 5)
+	#meme_suite.step_meme(nb_motif_max, len_motif)
+	#else : 
+	#meme_suite.step_meme_width_min_max(100, 5, 8, 10)
+	#meme_suite.step_meme_width_min_max(nb_motif_max, min_len_motif, max_len_motif, rep)
+	#meme_suite.step_tomtom(db)
 	meme_suite.launch_transf_regex_to_motif()
 	meme_suite.launch_find_known_motif()
 	dico_knwon_unknown_motif = meme_suite.create_dico_knwon_unknown_motif()
@@ -62,5 +63,6 @@ if __name__ == '__main__':
 
 '''
 python3 main.py -fasta_file "../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme"
+python3 main.py -fasta_file "../data/test.fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme" -min_len -max_len -nb_rep -nb_motif
 '''
 

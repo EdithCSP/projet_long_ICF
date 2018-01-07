@@ -137,7 +137,7 @@ def launch_tomtom(input_tomtom, output_tomtom, db):
 		OUTPUT: 
 			- fichier tomtom.txt qui contient les motifs retrouvé dans la base de données
 	'''
-	cmd = "tomtom -xalph -oc {} {} {}".format(output_tomtom, input_tomtom, db)
+	cmd = "tomtom -xalph -oc {} {}/meme.txt {}".format(output_tomtom, input_tomtom, db)
 	print(cmd)
 	os.system(cmd)
 

@@ -47,7 +47,7 @@ if __name__ == '__main__':
 	#else : 
 	#meme_suite.step_meme_width_min_max(100, 5, 8, 10)
 	#meme_suite.step_meme_width_min_max(nb_motif_max, min_len_motif, max_len_motif, rep)
-	#meme_suite.step_tomtom(db)
+	meme_suite.step_tomtom(db)
 	meme_suite.launch_transf_regex_to_motif()
 	meme_suite.launch_find_known_motif()
 	dico_knwon_unknown_motif = meme_suite.create_dico_knwon_unknown_motif()
@@ -56,7 +56,8 @@ if __name__ == '__main__':
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_known_motif.txt", "CG_plus_known_unknown_motif")
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_known_motif.txt", "CG_plus_moins_known_unknown_motif")	
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_unknown_motif.txt", "CG_plus_unknow_unknown_motif")
-	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_unknown_motif.txt", "CG_plus_moins_unknown_unknown_motif")		
+	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_unknown_motif.txt", "CG_plus_moins_unknown_unknown_motif")
+	#meme_suite.launch_dreme(fasta_fi, min_l = 5, path = "../data")		
 	end = time.time()
 	print("Duree du programme : {:.2f} secondes".format(end - begin))
 

@@ -361,4 +361,20 @@ def create_dico_knwon_unknown_motif():
 	return dico_motif_knwon_unknown_motif
 
 
+def launch_dreme(input_dreme, min_l = 5, path = "../data"):
+	'''
+		Cette fonction permet de lancer TOMTOM. 
+		INPUT:
+			- input_dreme : fichier de séquence au format fasta 
+			- output_dreme : nom du fchier de sortie
+			- min_l : taille minimal du motif 
+		OUTPUT: 
+			- fichier dreme.txt qui contient les motifs enrichi dans le fichier
+	'''
+	#os.system("mkdir "+path+"/output_dreme")
+	output_dreme = path+"/output_dreme"
+	cmd = "dreme -oc {} -p {} -m {}".format(output_dreme, input_dreme, min_l)
+	print(cmd)
+	os.system(cmd)
+
 #if __name__ == '__main__':

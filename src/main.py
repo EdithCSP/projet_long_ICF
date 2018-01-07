@@ -43,6 +43,7 @@ if __name__ == '__main__':
 	dico_all_seq = tools.create_dico_seq_concate_with_fasta(fasta_fi)
 	print("Making MEME input")
 	meme_suite.parse_fasta_for_meme(dico_all_seq)
+	'''
 	if args.len:
 		print("Search pattern of one size")
 		#meme_suite.step_meme(25, 5)
@@ -66,6 +67,7 @@ if __name__ == '__main__':
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_unknown_motif.txt", "CG_plus_unknow_unknown_motif")
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_unknown_motif.txt", "CG_plus_moins_unknown_unknown_motif")
 	##meme_suite.launch_dreme(fasta_fi, min_l = 5, path = "../data")		
+	'''
 	end = time.time()
 	print("Program duration : {:.2f} secondes".format(end - begin))
 

@@ -7,8 +7,9 @@ import os
 import tools
 import complement_meme
 
+
 def parse_fasta_for_meme(dico):
-	'''
+	'''	
 		Cett fonction permet de découpé un fichier fasta puisque en plusieurs 
 		fichier fasta qui seront les entrée de MEME. la taille de la base de données
 		de séquence fournit à meme est limiter à 100000 caractère.
@@ -37,6 +38,9 @@ def parse_fasta_for_meme(dico):
 			if(compt == 100001):
 				tools.write_dico_fasta_format(dico_new,"../data/meme_input/file_"+str(i)+".fasta")	
 				print("file_"+str(i)+".fasta")
+	tools.write_dico_fasta_format(dico_new,"../data/meme_input/file_"+str(i)+".fasta")	
+	print("file_"+str(i)+".fasta")	
+
 
 
 def launch_meme(input_meme, output_meme, max_motif, len_motif, min_rep = 10):

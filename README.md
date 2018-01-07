@@ -1,12 +1,12 @@
 # Investigation bio-informatique du syndrome ICF par analyse de génome : amélioration de MEME pour l'analyse de séquence avec changement de méthylation dû à des mutations associé à une pathologie.
 
 
-###### A propos
+### A propos
 Outils d'investigation bio-informatique par analyse de génome : amélioration de MEME pour l'analyse de séquence avec changement de méthylation dû à des mutations associé à une pathologie (syndrome ICF).
 - INPUT : sequence fasta
 - OUTPUT : 12 fichiers de motifs 
 
-###### Installation de R 
+### Installation de R 
 ``` {}
 sudo apt-get install r-base-core
 
@@ -14,7 +14,7 @@ sudo apt-get install r-base-core
 install.packages("stringr", dependencies=TRUE)
 ```
 
-###### Installation de MEME
+### Installation de MEME
 lien vers la documentation : http://meme-suite.org/doc/install.html?man_type=web#prerequisite 
 ``` {}
 # Install MEME
@@ -29,7 +29,7 @@ make install
 export PATH=$HOME/meme/bin:$PATH 
 ```
 
-###### Utilisation du programme
+### Utilisation du programme
  
  Exemple de ligne de commande
 ``` {}
@@ -62,5 +62,5 @@ optional arguments:
 ```
 
 
-###### Auteur
+### Auteur
 CHAN SOCK PENG Edith M2BI 2017-2018 

@@ -47,6 +47,10 @@ if __name__ == '__main__':
 	dico_knwon_unknown_motif = meme_suite.create_dico_knwon_unknown_motif()
 	##print(dico_knwon_unknown_motif)
 	complement_meme.find_CG_in_motif()
+	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_known_motif.txt", "CG_plus_known_unknown_motif")
+	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_known_motif.txt", "CG_plus_moins_known_unknown_motif")	
+	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_unknown_motif.txt", "CG_plus_unknow_unknown_motif")
+	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_unknown_motif.txt", "CG_plus_moins_unknown_unknown_motif")		
 	# subprosses.call
 	end = time.time()
 	print("Duree du programme : {:.2f} secondes".format(end - begin))

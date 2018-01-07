@@ -44,7 +44,19 @@ def find_CG_in_motif():
 
 # si les 2 motifs sont la seq 
 
-def find_motif_overlap(dico_all_seq, file1, file2):
+def find_motif_overlap(dico_all_seq, file1, file2, output):
+	'''
+		Cette fonction permet de trouver les motifs qui s'overlap dans le jeu de données.
+		INPUT:
+			- dico_all_seq : dictionnaire qui contient le jeu de données (séquences)
+			- file1 : fichier contenant des motifs
+			- file2 : fichier contenant des motifs	
+			- output : nom du fichier de sortie
+		OUTPUT:
+			- 1 fichier contenant les motifs qui s'overlap
+			- 1 fichier contenant les motifs qui ne s'overlap pas
+
+	'''
 	#dico_all_seq = tools.create_dico_seq_concate_with_fasta("../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta")
 	#filin1 = open("../results/CG_plus_unknown_motif.txt","r")
 	#filin2 = open("../results/CG_plus_known_motif.txt","r")
@@ -69,7 +81,7 @@ def find_motif_overlap(dico_all_seq, file1, file2):
 					begin_kn = val.index(known_motif)
 					begin_unkn = val.index(unknown_motif)
 					end_kn = begin_kn + len(known_motif)
-					end_unkn = begin_unk + len(unknown_motif)
+					end_unkn = begin_unkn + len(unknown_motif)
 					int_kn = set(range (begin_kn, end_kn))
 					int_unkn = set(range (begin_unkn, end_unkn))
 					len_overlap = len(int_kn.intersection(int_unkn))
@@ -77,19 +89,30 @@ def find_motif_overlap(dico_all_seq, file1, file2):
 						if(known_motif not in dico_overlap.keys()):
 							dico_overlap[known_motif] = []
 							dico_overlap[known_motif].append(unknown_motif)
-						else:
+						elif(unknown_motif not in dico_overlap[known_motif]):
 							dico_overlap[known_motif].append(unknown_motif)
 					else:
 						if(known_motif not in dico_no_overlap.keys()):
 							dico_no_overlap[known_motif] = []
 							dico_no_overlap[known_motif].append(unknown_motif)
-						else:
+						elif(unknown_motif not in dico_no_overlap[known_motif]):
 							dico_no_overlap[known_motif].append(unknown_motif)
+	filout = open("../results/"+output+"_no_overlap.txt","w")	
+	filout1 = open("../results/"+output+"_overlap.txt","w")
+	for key, val in dico_no_overlap.items():
+		filout.write("{}\t".format(key))
+		for elt in val:
+			filout.write("{}\t".format(elt))
+		filout.write("\n")
+	filout.close()					
+	for key, val in dico_overlap.items():
+		filout1.write("{}\t".format(key))
+		for elt in val:
+			filout1.write("{}\t".format(elt))
+		filout1.write("\n")
+	filout1.close()	
 
 
-val = "tagaaGCTATCTAAGAGTTAATCAAGTTGCCCCGCCCCCCCCCCCTCCCCGAGTCATAACAAGCTGCTGCCGATTTACTGGGCTGTATAAATTGTAGGAA"
-known_motif = "CCCGCC"
-unknown_motif = "GCCCCGCC" 
 '''
 dico_overlap = {} 
 dico_no_overlap = {} 

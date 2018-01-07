@@ -38,32 +38,40 @@ if __name__ == '__main__':
 	# main
 	os.system("export PATH=$HOME/meme/bin:$PATH")
 	os.system("chmod +x load_meme.sh")
-	os.system("./load_meme.sh")	
+	os.system("./load_meme.sh")
+	print("Reead file sequences")	
 	dico_all_seq = tools.create_dico_seq_concate_with_fasta(fasta_fi)
+	print("Making MEME input")
 	meme_suite.parse_fasta_for_meme(dico_all_seq)
-	#if args.len:
-	#meme_suite.step_meme(25, 5)
-	#meme_suite.step_meme(nb_motif_max, len_motif)
-	#else : 
-	#meme_suite.step_meme_width_min_max(100, 5, 8, 10)
-	#meme_suite.step_meme_width_min_max(nb_motif_max, min_len_motif, max_len_motif, rep)
+	if args.len:
+		print("Search pattern of one size")
+		#meme_suite.step_meme(25, 5)
+		meme_suite.step_meme(nb_motif_max, len_motif)
+	else : 
+		print("Search pattern in a size range")
+		#meme_suite.step_meme_width_min_max(100, 5, 8, 10)
+		meme_suite.step_meme_width_min_max(nb_motif_max, min_len_motif, max_len_motif, rep)	
+	print("Search for patterns in TOMTOM")
 	meme_suite.step_tomtom(db)
+	print("Generation of all possible patterns")
 	meme_suite.launch_transf_regex_to_motif()
+	print("Search for known or unknown patterns")
 	meme_suite.launch_find_known_motif()
 	dico_knwon_unknown_motif = meme_suite.create_dico_knwon_unknown_motif()
-	##print(dico_knwon_unknown_motif)
+	print("CG search in patterns")
 	complement_meme.find_CG_in_motif()
+	print("Search overlapping patterns")
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_known_motif.txt", "CG_plus_known_unknown_motif")
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_known_motif.txt", "CG_plus_moins_known_unknown_motif")	
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_unknown_motif.txt", "CG_plus_unknow_unknown_motif")
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_unknown_motif.txt", "CG_plus_moins_unknown_unknown_motif")
-	#meme_suite.launch_dreme(fasta_fi, min_l = 5, path = "../data")		
+	##meme_suite.launch_dreme(fasta_fi, min_l = 5, path = "../data")		
 	end = time.time()
-	print("Duree du programme : {:.2f} secondes".format(end - begin))
+	print("Program duration : {:.2f} secondes".format(end - begin))
 
 
 '''
-python3 main.py -fasta_file "../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme"
-python3 main.py -fasta_file "../data/test.fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme" -min_len -max_len -nb_rep -nb_motif
+python3 main.py -fasta_file "../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme" -len 5 
+python3 main.py -fasta_file "../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme" -min_len 5 -max_len 8
 '''
 

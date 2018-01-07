@@ -42,8 +42,6 @@ def find_CG_in_motif():
 	filout2.close()
 
 
-# si les 2 motifs sont la seq 
-
 def find_motif_overlap(dico_all_seq, file1, file2, output):
 	'''
 		Cette fonction permet de trouver les motifs qui s'overlap dans le jeu de données.

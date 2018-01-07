@@ -1,10 +1,5 @@
 library(stringr)
 
-#install.packages("stringr", dependencies=TRUE)
-
-#os.system("chmod +x analyse.R")
-#os.system("R --vanilla --slave < analyse.R")
-
 ### Repartition des motifs connus/ inconnues 
 known_motif = read.table("../results/known_motif.txt")
 unknown_motif = read.table("../results/unknown_motif.txt")

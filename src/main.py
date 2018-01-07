@@ -66,6 +66,7 @@ if __name__ == '__main__':
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_plus_unknown_motif.txt", "../results/CG_plus_unknown_motif.txt", "CG_plus_unknow_unknown_motif")
 	complement_meme.find_motif_overlap(dico_all_seq, "../results/CG_moins_unknown_motif.txt", "../results/CG_moins_unknown_motif.txt", "CG_moins_unknown_unknown_motif")
 	##meme_suite.launch_dreme(fasta_fi, min_l = 5, path = "../data")
+	os.system("R --vanilla --slave < analyse.R")
 	end = time.time()
 	print("Program duration : {:.2f} secondes".format(end - begin))
 

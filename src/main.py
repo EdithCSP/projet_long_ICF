@@ -36,6 +36,7 @@ if __name__ == '__main__':
 	max_len_motif = args.max_len
 	rep = args.nb_rep	
 	# main
+	
 	os.system("export PATH=$HOME/meme/bin:$PATH")
 	os.system("chmod +x load_meme.sh")
 	os.system("./load_meme.sh")

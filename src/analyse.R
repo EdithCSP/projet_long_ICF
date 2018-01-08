@@ -33,7 +33,7 @@ for ( i in seq(1:len_unknown_motif) ) {
 png("../results/Pattern_length_histogram.png")
 p1 = hist(taille_connus, plot=F)
 p2 = hist(taille_inconnus, plot=F)
-plot(p1, col="blue", xlab ="length pattern", main ="",freq=T)
+plot(p1, col="blue", xlab ="length pattern", xlim=c(5,8), main ="",freq=T)
 plot(p2, col="red", add=T)
 dev.off()
 

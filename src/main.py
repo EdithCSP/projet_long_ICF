@@ -70,13 +70,3 @@ if __name__ == '__main__':
 	os.system("R --vanilla --slave < analyse.R")
 	end = time.time()
 	print("Program duration : {:.2f} secondes".format(end - begin))
-
-
-'''
-python3 main.py -fasta_file "../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme" -len 5 -nb_motif 25
-
-python3 main.py -fasta_file "../data/Galaxy25-[FASTA_hypo_Zbtb24mut_genes].fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme" -min_len 5 -max_len 8 -nb_motif 25
-
-python3 main.py -fasta_file "../data/Galaxy26-[FASTA_hypo_Zbtb24mut_intergenic].fasta" -db "../bin/DB/motif_databases/HUMAN/HOCOMOCOv9.meme" -min_len 5 -max_len 8 -nb_motif 25 
-'''
-

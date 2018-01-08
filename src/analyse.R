@@ -43,10 +43,18 @@ known_motif_CG_moins = read.table("../results/CG_moins_known_motif.txt")
 unknown_motif_CG_plus = read.table("../results/CG_plus_unknown_motif.txt")
 unknown_motif_CG_moins = read.table("../results/CG_moins_unknown_motif.txt")
 
+
+len_known_motif_CG_plus = 0 
+len_known_motif_CG_moins = 0 
+len_unknown_motif_CG_plus = 0 
+len_unknown_motif_CG_moins = 0
+
+
 len_known_motif_CG_plus = dim(known_motif_CG_plus)[1]
 len_known_motif_CG_moins = dim(known_motif_CG_moins)[1]
 len_unknown_motif_CG_plus = dim(unknown_motif_CG_plus)[1]
 len_unknown_motif_CG_moins = dim(unknown_motif_CG_moins)[1]
+
 
 png("../results/CG_content_in_all_patterns.png")
 slices = c(len_known_motif_CG_plus, len_known_motif_CG_moins, len_unknown_motif_CG_plus, len_unknown_motif_CG_moins)
